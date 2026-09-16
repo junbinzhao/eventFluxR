@@ -90,9 +90,22 @@ classswap_model <- function(data, response_col, feature_cols, group_vars,
   ind_bg <- which(!is_hot)
   ind_hot <- which(is_hot)
 
+  if (length(ind_bg) < 2 || length(ind_hot) < 2) {
+    stop(
+      "The classifier assigned fewer than 2 observations to the ",
+      if (length(ind_bg) < 2) "background" else "hot-moment",
+      " class at threshold = ", threshold, ", so a regressor cannot be fit ",
+      "for that class. Try lowering `threshold`, increasing `n_trials`/",
+      "`nrounds` so the classifier learns a less degenerate split, or check ",
+      "that `label_col`/`mad_k` produce a reasonably balanced label.",
+      call. = FALSE
+    )
+  }
+
   # 2) background regressor
   dtrain_bg <- xgboost::xgb.DMatrix(data = x[ind_bg, , drop = FALSE], label = y[ind_bg])
   folds_bg <- .make_group_folds(data[ind_bg, , drop = FALSE], group_vars)
+  .check_cv_folds(folds_bg, "background")
   bg_fit <- .train_xgb_tuned(
     dtrain_bg, folds_bg,
     objective = "reg:squarederror", eval_metric = "rmse", maximize = FALSE,
@@ -106,6 +119,7 @@ classswap_model <- function(data, response_col, feature_cols, group_vars,
   dtrain_hot <- xgboost::xgb.DMatrix(data = x[ind_hot, , drop = FALSE],
                                      label = y[ind_hot], weight = w_hot)
   folds_hot <- .make_group_folds(data[ind_hot, , drop = FALSE], group_vars)
+  .check_cv_folds(folds_hot, "hot-moment")
   hot_fit <- .train_xgb_tuned(
     dtrain_hot, folds_hot,
     objective = "reg:squarederror", eval_metric = "rmse", maximize = FALSE,

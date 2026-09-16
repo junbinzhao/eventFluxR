@@ -4,6 +4,19 @@
   lapply(levels(grp), function(s) which(grp == s))
 }
 
+# Fail early with a clear message instead of a cryptic xgboost error when a
+# class subset spans fewer than 2 groups (xgb.cv requires >= 2 folds)
+.check_cv_folds <- function(folds, label) {
+  if (length(folds) < 2) {
+    stop(
+      "The ", label, " subset only spans ", length(folds), " group(s) after ",
+      "classification, so cross-validation folds cannot be built. Try a ",
+      "coarser `group_vars`, a different `threshold`, or more training data.",
+      call. = FALSE
+    )
+  }
+}
+
 # Upper-magnitude sample weights: w = max(1, (max(y,0)/q)^exponent)
 .magnitude_weights <- function(y, exponent = 1, q_prob = 0.95) {
   q <- stats::quantile(y, probs = q_prob, na.rm = TRUE)
