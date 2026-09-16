@@ -14,11 +14,11 @@ regressors), and detection/regression evaluation metrics including
 upper-tail bias diagnostics.
 }
 \author{
-\strong{Maintainer}: Junbin Author \email{author@example.com}
+\strong{Maintainer}: Junbin Zhao \email{junbin.zhao@nibio.no}
 
 Authors:
 \itemize{
-  \item Junbin Author \email{author@example.com}
+  \item Junbin Zhao \email{junbin.zhao@nibio.no}
 }
 
 }

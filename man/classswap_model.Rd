@@ -75,8 +75,8 @@ feats <- c("CO2_flux", "Soil_Moist", "Soil_T_2", "VPD", "fert_ef")
 
 fit <- classswap_model(
   n2o_sample, response_col = "N2O_flux", feature_cols = feats,
-  group_vars = "Chamber", label_col = "y_bin",
-  n_trials = 3, nrounds = 50, early_stopping_rounds = 10, verbose = FALSE
+  group_vars = "Plot", label_col = "y_bin",
+  n_trials = 15, nrounds = 300, early_stopping_rounds = 30, verbose = FALSE
 )
 pred <- predict(fit, n2o_sample)
 head(pred)

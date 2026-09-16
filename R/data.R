@@ -1,10 +1,10 @@
 #' Sample N2O flux observations from the Svanhovd experiment
 #'
-#' A real subset of chamber-based N2O flux measurements from two chambers
-#' (11 and 13) over the 2022 growing season (May-August), bundled for use in
-#' package examples.
+#' A real subset of chamber-based N2O flux measurements from four chambers
+#' (11, 8, 13, 17; spanning two plots and both fertilization levels) over the
+#' 2022 growing season (May-August), bundled for use in package examples.
 #'
-#' @format A data frame with 282 rows and 21 variables:
+#' @format A data frame with 493 rows and 21 variables:
 #' \describe{
 #'   \item{Plot}{Experimental plot identifier.}
 #'   \item{Chamber}{Chamber identifier (factor).}

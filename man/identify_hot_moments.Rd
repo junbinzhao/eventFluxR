@@ -125,8 +125,8 @@ hm_xgb <- identify_hot_moments(
   n2o_sample, method = "xgboost",
   label_col = "y_bin",
   feature_cols = c("CO2_flux", "Soil_Moist", "Soil_T_2", "VPD"),
-  group_vars = "Chamber",
-  n_trials = 3, nrounds = 50, early_stopping_rounds = 10, verbose = FALSE
+  group_vars = "Plot",
+  n_trials = 15, nrounds = 300, early_stopping_rounds = 30, verbose = FALSE
 )
 hm_xgb$sensitivity
 }
