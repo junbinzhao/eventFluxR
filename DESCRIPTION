@@ -1,0 +1,26 @@
+Package: eventFluxR
+Type: Package
+Title: Detect, Model and Evaluate Hot-Moment Flux Events
+Version: 0.1.0
+Depends: R (>= 3.5.0)
+Authors@R: person("Junbin", "Zhao", email = "junbin.zhao@nibio.no", role = c("aut", "cre"))
+Description: Reusable functions for identifying hot-moment events in
+    biogeochemical flux time series using a robust MAD-based rule
+    (with threshold sensitivity checks, event grouping and duration
+    calculation), computing decay-weighted fertilization indices,
+    fitting "class-swap" XGBoost models that separately model
+    background and hot-moment fluxes after classification, and
+    evaluating both classification (detection rate, false alarm rate,
+    PR-AUC) and regression (RMSE, MAE, ME by flux class, upper-tail
+    bias) performance.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Imports:
+    stats,
+    utils,
+    xgboost
+Suggests:
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Config/roxygen2/version: 8.1.0
